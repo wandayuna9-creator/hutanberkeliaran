@@ -3,23 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Hutan Kematian - Survival Game GitHub Pages</title>
+    <title>Hutan Kematian - Horror Survival Game</title>
     <style>
-        /* Modern Dark Reset & Styling */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             user-select: none;
             -webkit-user-select: none;
             touch-action: manipulation;
         }
 
         body {
-            background: linear-gradient(135deg, #050505 0%, #0d1117 50%, #030712 100%);
-            background-attachment: fixed;
-            color: #f3f4f6;
+            background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #020617 100%);
+            color: #f8fafc;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -27,351 +25,312 @@
             padding: 15px;
         }
 
-        /* HEADER & BRANDING LOGO */
+        /* HEADER & LOGO */
         header {
             text-align: center;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             width: 100%;
-            max-width: 600px;
+            max-width: 500px;
         }
 
-        .logo-container {
+        .logo-box {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 14px;
-            background: rgba(17, 24, 39, 0.75);
-            backdrop-filter: blur(12px);
-            padding: 12px 24px;
-            border-radius: 20px;
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+            gap: 12px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            padding: 10px 20px;
+            border-radius: 16px;
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.2);
         }
 
         .logo-svg {
-            width: 50px;
-            height: 50px;
-            filter: drop-shadow(0 0 10px rgba(239, 68, 68, 0.7));
+            width: 45px;
+            height: 45px;
+            filter: drop-shadow(0 0 8px #ef4444);
         }
 
-        .logo-text h1 {
-            font-size: 1.4rem;
-            font-weight: 800;
-            background: linear-gradient(to right, #ef4444, #f97316, #dc2626);
+        .logo-title h1 {
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: linear-gradient(90deg, #ef4444, #f97316);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
-        .logo-text p {
-            font-size: 0.75rem;
-            color: #9ca3af;
-            font-weight: 600;
+        .logo-title p {
+            font-size: 0.7rem;
+            color: #94a3b8;
         }
 
-        /* GAME BOARD CONTAINER */
-        #game-wrapper {
-            background: rgba(17, 24, 39, 0.85);
-            backdrop-filter: blur(16px);
-            border-radius: 24px;
-            padding: 15px;
-            border: 2px solid rgba(239, 68, 68, 0.25);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+        /* GAME WRAPPER */
+        #game-container {
+            background: rgba(15, 23, 42, 0.9);
+            border: 2px solid rgba(239, 68, 68, 0.3);
+            border-radius: 20px;
+            padding: 12px;
             width: 100%;
-            max-width: 500px;
+            max-width: 460px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.8);
         }
 
-        /* HUD PANEL (SKOR, LEVEL, SOUND) */
-        .hud-panel {
+        /* HUD PANEL */
+        .hud {
             display: flex;
             justify-content: space-between;
             align-items: center;
             width: 100%;
-            margin-bottom: 12px;
-            padding: 8px 15px;
-            background: rgba(31, 41, 55, 0.7);
-            border-radius: 14px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            background: rgba(30, 41, 59, 0.6);
+            border-radius: 12px;
         }
 
         .hud-item {
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
         }
 
         .hud-label {
             font-size: 0.65rem;
             color: #ef4444;
-            font-weight: 700;
-            text-transform: uppercase;
+            font-weight: bold;
         }
 
         .hud-value {
             font-size: 1.1rem;
             font-weight: 800;
-            color: #ffffff;
         }
 
-        .sound-btn {
+        .btn-sound {
             background: rgba(239, 68, 68, 0.2);
-            border: 1px solid rgba(239, 68, 68, 0.4);
+            border: 1px solid #ef4444;
             color: #ef4444;
-            padding: 6px 12px;
-            border-radius: 10px;
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: bold;
             cursor: pointer;
-            font-size: 0.8rem;
-            font-weight: 700;
-            transition: all 0.2s;
         }
 
-        .sound-btn:active {
-            transform: scale(0.95);
-        }
-
-        /* CANVAS STYLING */
+        /* CANVAS */
         canvas {
-            background: #030712;
-            border-radius: 16px;
+            background: #000;
+            border-radius: 12px;
             width: 100%;
-            max-width: 440px;
+            max-width: 420px;
             aspect-ratio: 1 / 1;
-            border: 3px solid rgba(239, 68, 68, 0.4);
-            box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.9);
+            border: 2px solid rgba(239, 68, 68, 0.5);
             display: block;
-            cursor: pointer;
         }
 
-        /* JOYSTICK CONTROL (MOBILE & LAPTOP) */
-        .joystick-container {
-            margin-top: 15px;
+        /* JOYSTICK VIRTUAL */
+        .joystick-grid {
+            margin-top: 12px;
             display: grid;
-            grid-template-columns: repeat(3, 55px);
-            grid-template-rows: repeat(3, 55px);
-            gap: 8px;
-            justify-content: center;
+            grid-template-columns: repeat(3, 50px);
+            grid-template-rows: repeat(3, 50px);
+            gap: 6px;
         }
 
         .joy-btn {
-            background: linear-gradient(145deg, rgba(31, 41, 55, 0.9), rgba(17, 24, 39, 0.9));
-            border: 1px solid rgba(239, 68, 68, 0.4);
-            border-radius: 16px;
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(239, 68, 68, 0.5);
+            border-radius: 12px;
             color: #ef4444;
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            transition: background 0.1s, transform 0.1s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.4);
         }
 
         .joy-btn:active {
             background: #ef4444;
-            color: #0f172a;
-            transform: scale(0.92);
+            color: #fff;
+            transform: scale(0.95);
         }
 
-        .joy-up { grid-column: 2; grid-row: 1; }
-        .joy-left { grid-column: 1; grid-row: 2; }
-        .joy-right { grid-column: 3; grid-row: 2; }
-        .joy-down { grid-column: 2; grid-row: 3; }
+        .j-up { grid-column: 2; grid-row: 1; }
+        .j-left { grid-column: 1; grid-row: 2; }
+        .j-right { grid-column: 3; grid-row: 2; }
+        .j-down { grid-column: 2; grid-row: 3; }
 
-        /* CARA BERMAIN SECTION */
-        .instructions {
-            margin-top: 20px;
-            background: rgba(17, 24, 39, 0.6);
-            border-radius: 16px;
-            padding: 15px;
-            max-width: 500px;
+        /* CARA BERMAIN */
+        .guide {
+            margin-top: 15px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 12px;
             width: 100%;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .instructions h3 {
-            color: #ef4444;
-            font-size: 0.95rem;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .instructions ul {
-            list-style: none;
+            max-width: 460px;
             font-size: 0.8rem;
-            color: #9ca3af;
-            line-height: 1.6;
+            color: #cbd5e1;
         }
 
-        .instructions li::before {
-            content: "• ";
+        .guide h3 {
             color: #ef4444;
-            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        .guide ul {
+            padding-left: 18px;
+            line-height: 1.5;
         }
     </style>
 </head>
 <body>
 
-    <!-- LOGO HEADER -->
+    <!-- HEADER LOGO -->
     <header>
-        <div class="logo-container">
-            <!-- Logo Vektor Tengkorak & Pohon Mati -->
+        <div class="logo-box">
             <svg class="logo-svg" viewBox="0 0 100 100">
-                <circle cx="50" cy="50" r="45" fill="#111827" stroke="#ef4444" stroke-width="4"/>
-                <!-- Pohon Mati -->
-                <path d="M 50 80 L 50 35 M 50 55 L 35 40 M 50 45 L 65 30 M 50 65 L 30 60 M 50 60 L 70 55" stroke="#ef4444" stroke-width="4" stroke-linecap="round"/>
-                <!-- Mata Merah Horor -->
+                <circle cx="50" cy="50" r="45" fill="#090d16" stroke="#ef4444" stroke-width="4"/>
+                <path d="M 50 80 L 50 35 M 50 55 L 35 40 M 50 45 L 65 30 M 50 65 L 30 60" stroke="#ef4444" stroke-width="4" stroke-linecap="round"/>
                 <circle cx="40" cy="30" r="3" fill="#dc2626"/>
                 <circle cx="60" cy="30" r="3" fill="#dc2626"/>
             </svg>
-            <div class="logo-text">
+            <div class="logo-title">
                 <h1>Hutan Kematian</h1>
-                <p>Horror Survival (GitHub Pages)</p>
+                <p>Horror Survival Game</p>
             </div>
         </div>
     </header>
 
     <!-- GAME WRAPPER -->
-    <div id="game-wrapper">
-        <div class="hud-panel">
+    <div id="game-container">
+        <div class="hud">
             <div class="hud-item">
-                <span class="hud-label">Skor</span>
-                <span id="score-val" class="hud-value">0</span>
+                <span class="hud-label">SKOR</span>
+                <span id="score" class="hud-value">0</span>
             </div>
             <div class="hud-item">
-                <span class="hud-label">Level</span>
-                <span id="level-val" class="hud-value">1</span>
+                <span class="hud-label">LEVEL</span>
+                <span id="level" class="hud-value">1</span>
             </div>
-            <button id="audio-toggle" class="sound-btn">🔊 Suara: ON</button>
+            <button id="sound-toggle" class="btn-sound">🔊 SUARA: ON</button>
         </div>
 
-        <canvas id="gameCanvas" width="400" height="400"></canvas>
+        <canvas id="canvas" width="400" height="400"></canvas>
 
-        <!-- JOYSTICK VIRTUAL -->
-        <div class="joystick-container">
-            <button class="joy-btn joy-up" onclick="setDirection('UP')">▲</button>
-            <button class="joy-btn joy-left" onclick="setDirection('LEFT')">◄</button>
-            <button class="joy-btn joy-right" onclick="setDirection('RIGHT')">►</button>
-            <button class="joy-btn joy-down" onclick="setDirection('DOWN')">▼</button>
+        <!-- JOYSTICK -->
+        <div class="joystick-grid">
+            <button class="joy-btn j-up" onclick="move('UP')">▲</button>
+            <button class="joy-btn j-left" onclick="move('LEFT')">◄</button>
+            <button class="joy-btn j-right" onclick="move('RIGHT')">►</button>
+            <button class="joy-btn j-down" onclick="move('DOWN')">▼</button>
         </div>
     </div>
 
     <!-- CARA BERMAIN -->
-    <div class="instructions">
-        <h3>📖 Cara Bermain</h3>
+    <div class="guide">
+        <h3>📖 Cara Bermain:</h3>
         <ul>
-            <li>Gunakan <b>Panah Keyboard (W,A,S,D)</b> atau <b>Joystick Virtual</b> untuk mengarahkan Survivor.</li>
-            <li>Kumpulkan **Lentera Cahaya (Kuning Emas)** untuk menambah skor dan memperluas jarak pandang senter.</li>
-            <li>Hindari menabrak **Jebakan Duri (Merah)** dan **Monster Hutan (Bayangan Merah)** yang selalu mengejarmu!</li>
-            <li>Setiap **50 Skor**, kamu akan **Naik Level**—hutan akan semakin gelap dan pergerakan monster semakin cepat!</li>
+            <li>Gunakan <b>W, A, S, D / Keyboard Arrow</b> atau <b>Joystick</b> di layar untuk bergerak.</li>
+            <li>Kumpulkan <b>Lentera Emas</b> untuk menambah skor.</li>
+            <li>Setiap 50 skor, level akan naik, pergerakan monster lebih cepat, dan senter makin redup.</li>
+            <li>Hindari <b>Monster Merah</b> dan <b>Jebakan Duri</b> agar tidak tewas!</li>
         </ul>
     </div>
 
     <script>
-        const canvas = document.getElementById('gameCanvas');
+        const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
 
-        const scoreEl = document.getElementById('score-val');
-        const levelEl = document.getElementById('level-val');
-        const audioBtn = document.getElementById('audio-toggle');
+        const scoreText = document.getElementById('score');
+        const levelText = document.getElementById('level');
+        const soundBtn = document.getElementById('sound-toggle');
 
-        // GAME VARIABLES
-        let player = { x: 200, y: 200, radius: 10, speed: 3, vx: 0, vy: 0 };
-        let lantern = { x: 100, y: 100, radius: 8 };
+        let player = { x: 200, y: 200, r: 8, speed: 2.5, vx: 0, vy: 0 };
+        let lantern = { x: 100, y: 100, r: 6 };
         let monsters = [];
         let traps = [];
         let trees = [];
 
         let score = 0;
         let level = 1;
-        let gameActive = false;
-        let soundEnabled = true;
+        let isPlaying = false;
+        let soundOn = true;
 
-        // AUDIO SYNTHESIZER (Efek Suara Horor Internal)
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        // EFEK SUARA HOROR (Web Audio API)
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
         let audioCtx = null;
 
-        function initAudio() {
-            if (!audioCtx) audioCtx = new AudioContext();
-        }
-
         function playSound(freq, type, duration) {
-            if (!soundEnabled || !audioCtx) return;
+            if (!soundOn) return;
+            if (!audioCtx) audioCtx = new AudioCtx();
             try {
                 let osc = audioCtx.createOscillator();
                 let gain = audioCtx.createGain();
                 osc.type = type;
                 osc.frequency.value = freq;
-                gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
                 gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
                 osc.connect(gain);
                 gain.connect(audioCtx.destination);
                 osc.start();
                 osc.stop(audioCtx.currentTime + duration);
-            } catch (e) {}
+            } catch(e) {}
         }
 
-        audioBtn.addEventListener('click', () => {
-            initAudio();
-            soundEnabled = !soundEnabled;
-            audioBtn.innerText = soundEnabled ? '🔊 Suara: ON' : '🔇 Suara: OFF';
+        soundBtn.addEventListener('click', () => {
+            soundOn = !soundOn;
+            soundBtn.innerText = soundOn ? "🔊 SUARA: ON" : "🔇 SUARA: OFF";
         });
 
-        // GENERATE MAP (POHON, JEBAKAN, MONSTER)
-        function initMap() {
+        // INIT MAP
+        function initLevel() {
             trees = [];
             traps = [];
             monsters = [];
 
-            // Buat Pohon-Pohon Mati
-            for (let i = 0; i < 15; i++) {
+            // Pohon
+            for (let i = 0; i < 12; i++) {
                 trees.push({
-                    x: Math.random() * (canvas.width - 40) + 20,
-                    y: Math.random() * (canvas.height - 40) + 20,
-                    r: Math.random() * 8 + 10
+                    x: Math.random() * 360 + 20,
+                    y: Math.random() * 360 + 20,
+                    r: Math.random() * 6 + 10
                 });
             }
 
-            // Buat Jebakan Duri
-            let trapCount = 2 + level;
-            for (let i = 0; i < trapCount; i++) {
+            // Jebakan Duri
+            for (let i = 0; i < 2 + level; i++) {
                 traps.push({
-                    x: Math.random() * (canvas.width - 60) + 30,
-                    y: Math.random() * (canvas.height - 60) + 30,
-                    size: 14
+                    x: Math.random() * 340 + 30,
+                    y: Math.random() * 340 + 30,
+                    size: 12
                 });
             }
 
-            // Buat Monster Hutan
-            let monsterCount = Math.min(level, 4);
-            for (let i = 0; i < monsterCount; i++) {
+            // Monster
+            let mCount = Math.min(level, 4);
+            for (let i = 0; i < mCount; i++) {
                 monsters.push({
-                    x: Math.random() < 0.5 ? 20 : canvas.width - 20,
-                    y: Math.random() < 0.5 ? 20 : canvas.height - 20,
-                    speed: 1 + level * 0.3,
-                    r: 12
+                    x: Math.random() < 0.5 ? 20 : 380,
+                    y: Math.random() < 0.5 ? 20 : 380,
+                    speed: 0.8 + (level * 0.25),
+                    r: 10
                 });
             }
 
             spawnLantern();
         }
 
-        // SPAWN LENTERA CAHAYA
         function spawnLantern() {
-            lantern.x = Math.random() * (canvas.width - 60) + 30;
-            lantern.y = Math.random() * (canvas.height - 60) + 30;
+            lantern.x = Math.random() * 340 + 30;
+            lantern.y = Math.random() * 340 + 30;
         }
 
-        // KONTROL ARAH
-        function setDirection(dir) {
-            initAudio();
-            if (!gameActive) startGame();
-
+        // KONTROL
+        function move(dir) {
+            if (!isPlaying) start();
             if (dir === 'UP') { player.vy = -player.speed; }
             if (dir === 'DOWN') { player.vy = player.speed; }
             if (dir === 'LEFT') { player.vx = -player.speed; }
@@ -379,195 +338,172 @@
         }
 
         window.addEventListener('keydown', e => {
-            switch (e.key) {
-                case 'ArrowUp': case 'w': case 'W': setDirection('UP'); break;
-                case 'ArrowDown': case 's': case 'S': setDirection('DOWN'); break;
-                case 'ArrowLeft': case 'a': case 'A': setDirection('LEFT'); break;
-                case 'ArrowRight': case 'd': case 'D': setDirection('RIGHT'); break;
-            }
+            if (['w','W','ArrowUp'].includes(e.key)) move('UP');
+            if (['s','S','ArrowDown'].includes(e.key)) move('DOWN');
+            if (['a','A','ArrowLeft'].includes(e.key)) move('LEFT');
+            if (['d','D','ArrowRight'].includes(e.key)) move('RIGHT');
         });
 
         window.addEventListener('keyup', e => {
-            if (['ArrowUp','w','W','ArrowDown','s','S'].includes(e.key)) player.vy = 0;
-            if (['ArrowLeft','a','A','ArrowRight','d','D'].includes(e.key)) player.vx = 0;
+            if (['w','W','s','S','ArrowUp','ArrowDown'].includes(e.key)) player.vy = 0;
+            if (['a','A','d','D','ArrowLeft','ArrowRight'].includes(e.key)) player.vx = 0;
         });
 
-        // UPDATE GAME STATE
+        // UPDATE GAME
         function update() {
-            if (!gameActive) return;
+            if (!isPlaying) return;
 
-            // Pergerakan Player
             player.x += player.vx;
             player.y += player.vy;
 
-            // Batas Area Game
-            player.x = Math.max(player.radius, Math.min(canvas.width - player.radius, player.x));
-            player.y = Math.max(player.radius, Math.min(canvas.height - player.radius, player.y));
+            player.x = Math.max(player.r, Math.min(canvas.width - player.r, player.x));
+            player.y = Math.max(player.r, Math.min(canvas.height - player.r, player.y));
 
             // Ambil Lentera
-            let distToLantern = Math.hypot(player.x - lantern.x, player.y - lantern.y);
-            if (distToLantern < player.radius + lantern.radius) {
+            if (Math.hypot(player.x - lantern.x, player.y - lantern.y) < player.r + lantern.r) {
                 score += 10;
-                scoreEl.innerText = score;
-                playSound(600, 'sine', 0.15);
+                scoreText.innerText = score;
+                playSound(587, 'sine', 0.15);
                 spawnLantern();
 
-                // Check Level Up
                 if (score % 50 === 0) {
                     level++;
-                    levelEl.innerText = level;
-                    initMap();
-                    playSound(200, 'sawtooth', 0.3);
+                    levelText.innerText = level;
+                    initLevel();
+                    playSound(300, 'sawtooth', 0.3);
                 }
             }
 
-            // Pergerakan Monster Mengejar Player
+            // AI Monster Chase
             monsters.forEach(m => {
                 let angle = Math.atan2(player.y - m.y, player.x - m.x);
                 m.x += Math.cos(angle) * m.speed;
                 m.y += Math.sin(angle) * m.speed;
 
-                // Tabrakan Player vs Monster
-                let distToMonster = Math.hypot(player.x - m.x, player.y - m.y);
-                if (distToMonster < player.radius + m.r - 2) {
+                if (Math.hypot(player.x - m.x, player.y - m.y) < player.r + m.r - 2) {
                     gameOver();
                 }
             });
 
-            // Tabrakan Player vs Jebakan
+            // Tabrak Jebakan
             traps.forEach(t => {
-                let distToTrap = Math.hypot(player.x - t.x, player.y - t.y);
-                if (distToTrap < player.radius + t.size / 2) {
+                if (Math.hypot(player.x - t.x, player.y - t.y) < player.r + t.size / 2) {
                     gameOver();
                 }
             });
         }
 
-        // DRAW ELEMEN & FOG OF WAR (EFEK SENTER REALISTIS)
+        // RENDER / GRAFIK
         function draw() {
-            // Background Tanah Hutan Gelap
-            ctx.fillStyle = '#050811';
+            // Background Hutan
+            ctx.fillStyle = '#030712';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // Gambar Pohon-Pohon Mati
+            // Pohon Mati
             trees.forEach(t => {
-                ctx.fillStyle = '#1f2937';
+                ctx.fillStyle = '#1e293b';
                 ctx.beginPath();
                 ctx.arc(t.x, t.y, t.r, 0, Math.PI * 2);
                 ctx.fill();
-
-                ctx.strokeStyle = '#111827';
-                ctx.lineWidth = 2;
-                ctx.beginPath();
-                ctx.moveTo(t.x - t.r, t.y); ctx.lineTo(t.x + t.r, t.y);
-                ctx.moveTo(t.x, t.y - t.r); ctx.lineTo(t.x, t.y + t.r);
-                ctx.stroke();
             });
 
-            // Gambar Jebakan Duri
+            // Jebakan Duri
             traps.forEach(t => {
                 ctx.fillStyle = '#ef4444';
-                ctx.shadowColor = '#ef4444';
-                ctx.shadowBlur = 8;
                 ctx.beginPath();
                 ctx.moveTo(t.x, t.y - t.size / 2);
                 ctx.lineTo(t.x + t.size / 2, t.y + t.size / 2);
                 ctx.lineTo(t.x - t.size / 2, t.y + t.size / 2);
-                ctx.closePath();
                 ctx.fill();
-                ctx.shadowBlur = 0;
             });
 
-            // Gambar Lentera Cahaya (Target)
+            // Lentera
             ctx.fillStyle = '#fbbf24';
             ctx.shadowColor = '#fbbf24';
-            ctx.shadowBlur = 15;
+            ctx.shadowBlur = 12;
             ctx.beginPath();
-            ctx.arc(lantern.x, lantern.y, lantern.radius, 0, Math.PI * 2);
+            ctx.arc(lantern.x, lantern.y, lantern.r, 0, Math.PI * 2);
             ctx.fill();
             ctx.shadowBlur = 0;
 
-            // Gambar Monster Hutan
+            // Monster
             monsters.forEach(m => {
                 ctx.fillStyle = '#dc2626';
                 ctx.shadowColor = '#dc2626';
-                ctx.shadowBlur = 12;
+                ctx.shadowBlur = 10;
                 ctx.beginPath();
                 ctx.arc(m.x, m.y, m.r, 0, Math.PI * 2);
-                ctx.fill();
-
-                // Mata Merah Menyala
-                ctx.fillStyle = '#ffffff';
-                ctx.beginPath();
-                ctx.arc(m.x - 3, m.y - 2, 2, 0, Math.PI * 2);
-                ctx.arc(m.x + 3, m.y - 2, 2, 0, Math.PI * 2);
                 ctx.fill();
                 ctx.shadowBlur = 0;
             });
 
-            // Gambar PLAYER (Survivor)
-            ctx.fillStyle = '#60a5fa';
-            ctx.shadowColor = '#60a5fa';
-            ctx.shadowBlur = 10;
+            // Survivor (Player)
+            ctx.fillStyle = '#38bdf8';
+            ctx.shadowColor = '#38bdf8';
+            ctx.shadowBlur = 8;
             ctx.beginPath();
-            ctx.arc(player.x, player.y, player.radius, 0, Math.PI * 2);
+            ctx.arc(player.x, player.y, player.r, 0, Math.PI * 2);
             ctx.fill();
             ctx.shadowBlur = 0;
 
-            // EFEK KEGELAPAN (FOG OF WAR / SENTER SURVIVOR)
-            let lightRadius = Math.max(60, 130 - level * 10);
-            let fogGrad = ctx.createRadialGradient(
-                player.x, player.y, 10,
-                player.x, player.y, lightRadius
-            );
-            fogGrad.addColorStop(0, 'rgba(0, 0, 0, 0)');
-            fogGrad.addColorStop(0.7, 'rgba(5, 8, 17, 0.7)');
-            fogGrad.addColorStop(1, 'rgba(5, 8, 17, 0.98)');
-
-            ctx.fillStyle = fogGrad;
+            // EFEK SENTER / FOG OF WAR REALISTIS
+            let viewDist = Math.max(50, 120 - level * 8);
+            let fog = ctx.createRadialGradient(player.x, player.y, 5, player.x, player.y, viewDist);
+            fog.addColorStop(0, 'rgba(0,0,0,0)');
+            fog.addColorStop(0.7, 'rgba(3, 7, 18, 0.7)');
+            fog.addColorStop(1, 'rgba(3, 7, 18, 0.98)');
+            ctx.fillStyle = fog;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // Overlay Game Over & Start Screen
-            if (!gameActive) {
-                ctx.fillStyle = 'rgba(3, 7, 18, 0.92)';
+            // TAMPILAN START & GAME OVER
+            if (!isPlaying) {
+                ctx.fillStyle = 'rgba(2, 6, 23, 0.92)';
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
                 ctx.textAlign = 'center';
                 if (score === 0) {
                     ctx.fillStyle = '#ef4444';
-                    ctx.font = 'bold 20px "Plus Jakarta Sans", sans-serif';
-                    ctx.fillText('TEKAN PANAH / JOYSTICK', canvas.width / 2, canvas.height / 2 - 10);
-                    ctx.fillStyle = '#f3f4f6';
-                    ctx.font = '14px "Plus Jakarta Sans", sans-serif';
-                    ctx.fillText('Untuk Melarikan Diri Dari Hutan Gelap', canvas.width / 2, canvas.height / 2 + 20);
+                    ctx.font = 'bold 18px sans-serif';
+                    ctx.fillText('TEKAN ARAH / JOYSTICK', canvas.width / 2, canvas.height / 2 - 10);
+                    ctx.fillStyle = '#94a3b8';
+                    ctx.font = '12px sans-serif';
+                    ctx.fillText('Untuk Mulai Bertahan Hidup', canvas.width / 2, canvas.height / 2 + 15);
                 } else {
                     ctx.fillStyle = '#dc2626';
-                    ctx.font = 'bold 22px "Plus Jakarta Sans", sans-serif';
-                    ctx.fillText('KAMU TEWAS DI HUTAN! 💀', canvas.width / 2, canvas.height / 2 - 20);
-                    ctx.fillStyle = '#f3f4f6';
-                    ctx.font = '14px "Plus Jakarta Sans", sans-serif';
+                    ctx.font = 'bold 20px sans-serif';
+                    ctx.fillText('KAMU TEWAS! 💀', canvas.width / 2, canvas.height / 2 - 15);
+                    ctx.fillStyle = '#f8fafc';
+                    ctx.font = '13px sans-serif';
                     ctx.fillText('Skor Kelangsungan Hidup: ' + score, canvas.width / 2, canvas.height / 2 + 10);
                     ctx.fillStyle = '#ef4444';
-                    ctx.fillText('Tekan Tombol untuk Coba Lagi', canvas.width / 2, canvas.height / 2 + 40);
+                    ctx.fillText('Gunakan Tombol Arah untuk Coba Lagi', canvas.width / 2, canvas.height / 2 + 35);
                 }
                 ctx.textAlign = 'left';
             }
         }
 
-        function gameLoop() {
+        function loop() {
             update();
             draw();
-            requestAnimationFrame(gameLoop);
+            requestAnimationFrame(loop);
         }
 
-        function startGame() {
-            player = { x: 200, y: 200, radius: 10, speed: 3, vx: 0, vy: 0 };
+        function start() {
+            player = { x: 200, y: 200, r: 8, speed: 2.5, vx: 0, vy: 0 };
             score = 0;
             level = 1;
-            scoreEl.innerText = score;
-            levelEl.innerText = level;
-            gameActive = true;
-            initMap();
+            scoreText.innerText = score;
+            levelText.innerText = level;
+            isPlaying = true;
+            initLevel();
         }
 
         function gameOver() {
+            playSound(80, 'sawtooth', 0.4);
+            isPlaying = false;
+        }
+
+        loop();
+    </script>
+</body>
+            </html>
